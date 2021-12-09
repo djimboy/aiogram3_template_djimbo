@@ -1,0 +1,3 @@
+aiogram~=3.0.0a18
+APScheduler~=3.8.0
+asyncio~=3.4.3
