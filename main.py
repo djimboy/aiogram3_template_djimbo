@@ -41,7 +41,6 @@ async def main():
     setup_middlwares(user_router)
 
     # Setup filters
-    print(F.from_user.id)
     admin_router.message.filter(F.from_user.id.in_(get_admins()))
     admin_router.message.filter(F.chat.type == "private")
     user_router.message.filter(F.chat.type == "private")
@@ -61,6 +60,7 @@ async def main():
         await bot.get_updates(offset=-1)
         await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
     finally:
+        print("11")
         await bot.session.close()
 
 
