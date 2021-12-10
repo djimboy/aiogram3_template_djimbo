@@ -9,10 +9,10 @@ from tgbot.utils.free_functions import rkb
 def menu_frep(user_id):
     keyboard = ReplyKeyboardBuilder(
     ).row(
-        rkb("Test 1"), rkb("Test 2"), rkb("Test 3")
+        rkb("User 1"), rkb("User 2"), rkb("User 3")
     )
 
     if str(user_id) in get_admins():
-        keyboard.row(rkb("Admin 1"), rkb("Admin 2"))
+        keyboard.row(rkb("Admin 1"), rkb("Admin 2"), rkb("Admin 3"))
 
     return keyboard.as_markup(resize_keyboard=True)
