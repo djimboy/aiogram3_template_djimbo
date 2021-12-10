@@ -16,7 +16,7 @@ class ThrottlingMiddleware(BaseMiddleware):
         user: Optional[User] = data.get("event_from_user")
 
         if user:
-            if int(time.time()) - self.last_throttled > self.default_rate:
+            if int(time.time()) - self.last_throttled >= self.default_rate:
                 self.last_throttled = int(time.time())
                 self.default_rate = 0.5
                 self.count_throttled = 0
