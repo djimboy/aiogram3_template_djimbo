@@ -18,6 +18,7 @@ def get_admins():
     config.read("settings.ini")
     admins = config["settings"]["admin_id"].strip()
     admins = admins.replace(" ", "")
+    save_admins = []
 
     if "," in admins:
         admins = admins.split(",")
@@ -33,4 +34,7 @@ def get_admins():
     if " " in admins:
         admins.remove(" ")
 
-    return admins
+    for admin in admins:
+        save_admins.append(int(admin))
+
+    return save_admins
