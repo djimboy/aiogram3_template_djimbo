@@ -1,9 +1,7 @@
 # - *- coding: utf- 8 - *-
 import time
-from typing import Optional
 
 from aiogram import BaseMiddleware, types
-from aiogram.types import User
 
 
 class ThrottlingMiddleware(BaseMiddleware):
