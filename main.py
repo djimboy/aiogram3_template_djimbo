@@ -3,11 +3,10 @@ import asyncio
 import os
 import platform
 
-from aiogram import Bot, Dispatcher, Router
+from aiogram import Bot, Dispatcher, Router, F
 
 from tgbot import setup_middlwares
-from tgbot.config import BOT_TOKEN, scheduler
-from tgbot.filters import IsPrivate
+from tgbot.config import BOT_TOKEN, scheduler, get_admins
 from tgbot.handlers.admin import setup_admin_handlers
 from tgbot.handlers.user import setup_user_handlers
 from tgbot.services.api_sqlite import create_bdx
@@ -17,7 +16,7 @@ from tgbot.utils.misc_functions import auto_backup, on_startup_notify
 
 
 # Start sheduler functions
-async def scheduler_default(bot):
+async def scheduler_start(bot):
     scheduler.add_job(auto_backup, "interval", seconds=43200, args=(bot,))  # Autobackup every 43200 seconds
 
 
@@ -27,26 +26,33 @@ async def main():
     scheduler.start()
 
     bot = Bot(token=BOT_TOKEN, parse_mode="HTML")
+
+    # Create routers
     admin_router = Router()
     user_router = Router()
-    dp = Dispatcher()
 
+    # Build dispatcher and connect to routers
+    dp = Dispatcher()
+    dp.include_router(admin_router)
+    dp.include_router(user_router)
+
+    # Setup middlawares
     setup_middlwares(admin_router)
     setup_middlwares(user_router)
 
-    admin_router.message.filter(IsPrivate())
-    user_router.message.filter(IsPrivate())
+    # Setup filters
+    admin_router.message.filter(F.from_user.id.in_(get_admins()))
+    admin_router.message.filter(F.chat.type == "private")
+    user_router.message.filter(F.chat.type == "private")
 
+    # Setup handlers
     setup_admin_handlers(admin_router)
     setup_user_handlers(user_router)
-
-    dp.include_router(admin_router)
-    dp.include_router(user_router)
 
     try:
         await set_commands(bot)
         await on_startup_notify(bot)
-        await scheduler_default(bot)
+        await scheduler_start(bot)
 
         print("~~~~~ Bot was started ~~~~~")
         logger.info("Bot was started")
