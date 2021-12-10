@@ -5,12 +5,6 @@ from aiogram.dispatcher.filters import BaseFilter
 from tgbot.config import get_admins
 
 
-# Checking for writing a message to a PM bot
-class IsPrivate(BaseFilter):
-    async def __call__(self, message: types.Message):
-        return message.chat.type == "private"
-
-
 # Checking for admin
 class IsAdmin(BaseFilter):
     async def __call__(self, message: types.Message):
