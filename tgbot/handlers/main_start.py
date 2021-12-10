@@ -3,7 +3,6 @@ from aiogram import Router
 from aiogram import types
 from aiogram.dispatcher.fsm.context import FSMContext
 
-from tgbot.filters import IsPrivate
 from tgbot.keyboards.reply import menu_frep
 
 
