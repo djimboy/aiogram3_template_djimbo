@@ -4,7 +4,6 @@ from aiogram.dispatcher.fsm.context import FSMContext
 from aiogram.types import FSInputFile
 
 from tgbot.config import database_path
-from tgbot.filters.all_filters import IsAdmin
 from tgbot.keyboards.inline import test_inl
 from tgbot.utils.free_functions import get_date
 
@@ -43,8 +42,8 @@ async def admin_database(message: types.Message, state: FSMContext):
 
 
 def register_admin_menu(router: Router):
-    router.message.register(admin_btn_one, IsAdmin(), text="Admin 1", state="*")
-    router.message.register(admin_btn_two, IsAdmin(), text="Admin 2", state="*")
-    router.message.register(admin_btn_three, IsAdmin(), text="Admin 3", state="*")
+    router.message.register(admin_btn_one, text="Admin 1", state="*")
+    router.message.register(admin_btn_two, text="Admin 2", state="*")
+    router.message.register(admin_btn_three, text="Admin 3", state="*")
 
-    router.message.register(admin_database, IsAdmin(), commands="getbd", state="*")
+    router.message.register(admin_database, commands="getbd", state="*")
