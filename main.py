@@ -5,8 +5,11 @@ import platform
 
 from aiogram import Bot, Dispatcher, Router
 
-from tgbot import setup_events
+from tgbot import setup_middlwares
 from tgbot.config import BOT_TOKEN, scheduler
+from tgbot.filters import IsPrivate
+from tgbot.handlers.admin import setup_admin_handlers
+from tgbot.handlers.user import setup_user_handlers
 from tgbot.services.api_sqlite import create_bdx
 from tgbot.utils.misc.bot_commands import set_commands
 from tgbot.utils.misc.bot_logging import start_logging
@@ -24,12 +27,21 @@ async def main():
     scheduler.start()
 
     bot = Bot(token=BOT_TOKEN, parse_mode="HTML")
-    main_router = Router()
+    admin_router = Router()
+    user_router = Router()
     dp = Dispatcher()
 
-    setup_events(main_router)
+    setup_middlwares(admin_router)
+    setup_middlwares(user_router)
 
-    dp.include_router(main_router)
+    admin_router.message.filter(IsPrivate())
+    user_router.message.filter(IsPrivate())
+
+    setup_admin_handlers(admin_router)
+    setup_user_handlers(user_router)
+
+    dp.include_router(admin_router)
+    dp.include_router(user_router)
 
     try:
         await set_commands(bot)
