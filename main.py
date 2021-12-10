@@ -41,8 +41,7 @@ async def main():
     setup_middlwares(user_router)
 
     # Setup filters
-    admin_router.message.filter(F.from_user.id.in_(get_admins()))
-    admin_router.message.filter(F.chat.type == "private")
+    admin_router.message.filter(F.from_user.id.in_(get_admins()) & F.chat.type == "private")
     user_router.message.filter(F.chat.type == "private")
 
     # Setup handlers
