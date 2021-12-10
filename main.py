@@ -5,10 +5,10 @@ import platform
 
 from aiogram import Bot, Dispatcher, Router, F
 
-from tgbot import setup_middlwares
 from tgbot.config import BOT_TOKEN, scheduler, get_admins
 from tgbot.handlers.admin import setup_admin_handlers
 from tgbot.handlers.user import setup_user_handlers
+from tgbot.middlewares import setup_middlwares
 from tgbot.services.api_sqlite import create_bdx
 from tgbot.utils.misc.bot_commands import set_commands
 from tgbot.utils.misc.bot_logging import start_logging
@@ -41,6 +41,7 @@ async def main():
     setup_middlwares(user_router)
 
     # Setup filters
+    print(F.from_user.id)
     admin_router.message.filter(F.from_user.id.in_(get_admins()))
     admin_router.message.filter(F.chat.type == "private")
     user_router.message.filter(F.chat.type == "private")
