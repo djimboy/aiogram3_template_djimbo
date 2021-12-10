@@ -1,7 +1,7 @@
 # - *- coding: utf- 8 - *-
 import asyncio
 import os
-import platform
+import sys
 
 from aiogram import Bot, Dispatcher, Router, F
 
@@ -9,6 +9,7 @@ from tgbot.config import BOT_TOKEN, scheduler, get_admins
 from tgbot.handlers.admin import setup_admin_handlers
 from tgbot.handlers.user import setup_user_handlers
 from tgbot.middlewares import setup_middlwares
+from tgbot.services.api_session import RequestsSession
 from tgbot.services.api_sqlite import create_bdx
 from tgbot.utils.misc.bot_commands import set_commands
 from tgbot.utils.misc.bot_logging import start_logging
@@ -26,6 +27,7 @@ async def main():
     scheduler.start()
 
     bot = Bot(token=BOT_TOKEN, parse_mode="HTML")
+    request = RequestsSession()
 
     # Create routers
     admin_router = Router()
@@ -57,8 +59,9 @@ async def main():
         logger.info("Bot was started")
 
         await bot.get_updates(offset=-1)
-        await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types())
+        await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types(), request=request)
     finally:
+        await request.close()
         await bot.session.close()
 
 
@@ -66,11 +69,14 @@ if __name__ == "__main__":
     logger = start_logging()
 
     try:
-        asyncio.get_event_loop().run_until_complete(main())
+        if sys.version_info[0] == 3 and sys.version_info[1] >= 8 and sys.platform.startswith("win"):
+            asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+
+        asyncio.run(main())
     except (KeyboardInterrupt, SystemExit):
         logger.warning("Bot was stopped")
     finally:
-        if platform.system().lower() == "windows":
+        if sys.platform.startswith("win"):
             os.system("cls")
         else:
             os.system("clear")
