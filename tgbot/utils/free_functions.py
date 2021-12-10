@@ -65,9 +65,9 @@ def is_float(get_number):
             get_number = get_number.replace(",", ".")
         float(get_number)
 
-        return False
-    except ValueError:
         return True
+    except ValueError:
+        return False
 
 
 # Converting a number to an integer
