@@ -18,4 +18,4 @@ async def main_start(message: types.Message, state: FSMContext):
 
 
 def register_main_start(router: Router):
-    router.message.register(main_start, IsPrivate(), commands=["start"], state="*")
+    router.message.register(main_start, commands=["start"], state="*")
