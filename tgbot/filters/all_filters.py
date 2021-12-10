@@ -2,13 +2,11 @@
 from aiogram import types
 from aiogram.dispatcher.filters import BaseFilter
 
-from tgbot.config import get_admins
 
-
-# Checking for admin
-class IsAdmin(BaseFilter):
+# Test filter
+class IsTest(BaseFilter):
     async def __call__(self, message: types.Message):
-        if str(message.from_user.id) in get_admins():
+        if "test" in ["test"]:
             return True
         else:
             return False
