@@ -44,6 +44,29 @@ def get_unix():
     return int(time.time()) + 10800
 
 
+# Format rate amount
+def format_rate(rate):
+    len_rate = str(int(rate))
+
+    if len(len_rate) == 3:
+        get_rate = str(len_rate)
+    elif len(len_rate) == 4:
+        get_rate = f"{len_rate[0]} {len_rate[1:]}"
+    elif len(len_rate) == 5:
+        get_rate = f"{len_rate[0:2]} {len_rate[2:]}"
+    elif len(len_rate) == 6:
+        get_rate = f"{len_rate[0:3]} {len_rate[3:]}"
+    elif len(len_rate) == 7:
+        get_rate = f"{len_rate[0:1]} {len_rate[1:4]} {len_rate[4:]}"
+    elif len(len_rate) == 8:
+        get_rate = f"{len_rate[0:2]} {len_rate[2:5]} {len_rate[5:]}"
+    elif len(len_rate) == 9:
+        get_rate = f"{len_rate[0:3]} {len_rate[3:6]} {len_rate[6:]}"
+    elif len(len_rate) == 10:
+        get_rate = f"{len_rate[0:1]} {len_rate[1:4]} {len_rate[4:7]} {len_rate[7:]}"
+
+    return get_rate
+
 ######################################## NUMBERS ########################################
 # Converting a number to a real
 def to_float(get_number):
