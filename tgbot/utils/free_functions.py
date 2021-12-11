@@ -45,8 +45,13 @@ def get_unix():
 
 
 # Format rate amount
-def format_rate(rate):
-    len_rate = str(int(rate))
+def format_rate(rate, around=False):
+    rate = str(round(float(rate), 2))
+
+    if "," in rate:
+        rate = float(rate.replace(",", "."))
+
+    len_rate = str(int(float(rate)))
 
     if len(len_rate) == 3:
         get_rate = str(len_rate)
@@ -64,6 +69,11 @@ def format_rate(rate):
         get_rate = f"{len_rate[0:3]} {len_rate[3:6]} {len_rate[6:]}"
     elif len(len_rate) == 10:
         get_rate = f"{len_rate[0:1]} {len_rate[1:4]} {len_rate[4:7]} {len_rate[7:]}"
+
+    if not around:
+        if "." in rate:
+            dot_amount = rate.find(".")
+            get_rate += f"{rate[dot_amount:]}"
 
     return get_rate
 
