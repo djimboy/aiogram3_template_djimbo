@@ -9,7 +9,7 @@ from tgbot.utils.free_functions import get_date
 # Action after launching the bot (sending a message to all admins that the bot is running)
 async def on_startup_notify(bot: Bot):
     if len(get_admins()) >= 1:
-        await send_all_admin(bot, "<b>✅ Bot was started</b>")
+        await send_admins(bot, "<b>✅ Бот был запущен</b>")
 
 
 # Automatic backups
@@ -24,7 +24,7 @@ async def auto_backup(bot: Bot):
 
 
 # Sending a message to all admins
-async def send_all_admin(bot: Bot, message, markup=None, not_me=0):
+async def send_admins(bot: Bot, message, markup=None, not_me=0):
     for admin in get_admins():
         try:
             if str(admin) != str(not_me):
