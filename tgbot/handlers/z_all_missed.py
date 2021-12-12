@@ -23,15 +23,15 @@ async def processing_callback_missed(call: CallbackQuery, state: FSMContext):
     except:
         pass
 
-    await call.message.answer("<b>❌ Data was not found due to bot restart.\n"
-                              "♻ Perform the action again.</b>",
+    await call.message.answer("<b>❌ Данные не были найдены из-за перезапуска скрипта.\n"
+                              "♻ Выполните действие заново.</b>",
                               reply_markup=menu_frep(call.from_user.id))
 
 
 # Processing all unknown messages
 async def processing_message_missed(message: types.Message):
-    await message.answer("<b>♦ Unknown command.</b>\n"
-                         "▶ Enter /start")
+    await message.answer("<b>♦ Неизвестная команда.</b>\n"
+                         "▶ Введите /start")
 
 
 def register_all_missed(router: Router):
