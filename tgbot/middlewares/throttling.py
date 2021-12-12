@@ -21,6 +21,6 @@ class ThrottlingMiddleware(BaseMiddleware):
                 self.default_rate = 3
             else:
                 self.count_throttled += 1
-                await event.reply("<b>❗ Please, do not spam.</b>")
+                await event.reply("<b>❗ Пожалуйста, не спамьте.</b>")
 
         self.last_throttled = int(time.time())
