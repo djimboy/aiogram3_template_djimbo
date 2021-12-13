@@ -7,7 +7,7 @@ from aiogram.types import InlineKeyboardButton, KeyboardButton
 
 
 # Clear HTML tags
-def clear_html(get_text):
+def clear_html(get_text: str):
     if "<" in get_text: get_text = get_text.replace("<", "*")
     if ">" in get_text: get_text = get_text.replace(">", "*")
 
@@ -15,7 +15,7 @@ def clear_html(get_text):
 
 
 # Clear spaces in list
-def clear_list(get_list):
+def clear_list(get_list: list):
     if "" in get_list:
         get_list.remove("")
 
@@ -26,7 +26,7 @@ def clear_list(get_list):
 
 
 # Split list into several parts
-def split_messages(get_list, count):
+def split_messages(get_list: list, count: int):
     return [get_list[i:i + count] for i in range(0, len(get_list), count)]
 
 
@@ -57,7 +57,7 @@ def get_unix():
 
 
 # Generate passowrd
-def generate_password(len_password):
+def generate_password(len_password: int):
     passwd = list("1234567890abcdefghigklmnopqrstuvyxwzABCDEFGHIGKLMNOPQRSTUVYXWZ")
     random.shuffle(passwd)
     random_chars = "".join([random.choice(passwd) for x in range(len_password)])
