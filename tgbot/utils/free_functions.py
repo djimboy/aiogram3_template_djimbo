@@ -56,7 +56,7 @@ def get_unix():
     return int(time.time()) + 10800
 
 
-# Generate
+# Generate passowrd
 def generate_password(len_password):
     passwd = list("1234567890abcdefghigklmnopqrstuvyxwzABCDEFGHIGKLMNOPQRSTUVYXWZ")
     random.shuffle(passwd)
