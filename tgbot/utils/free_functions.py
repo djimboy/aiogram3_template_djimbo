@@ -1,4 +1,5 @@
 # - *- coding: utf- 8 - *-
+import random
 import time
 from datetime import datetime
 
@@ -53,6 +54,15 @@ def get_date():
 # Get unix date
 def get_unix():
     return int(time.time()) + 10800
+
+
+# Generate
+def generate_password(len_password):
+    passwd = list("1234567890abcdefghigklmnopqrstuvyxwzABCDEFGHIGKLMNOPQRSTUVYXWZ")
+    random.shuffle(passwd)
+    random_chars = "".join([random.choice(passwd) for x in range(len_password)])
+
+    return random_chars
 
 
 # Format rate amount
