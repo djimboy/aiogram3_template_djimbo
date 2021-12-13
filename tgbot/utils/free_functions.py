@@ -22,6 +22,9 @@ def clear_list(get_list: list):
     if " " in get_list:
         get_list.remove(" ")
 
+    if "\r" in get_list:
+        get_list.remove("\r")
+
     return get_list
 
 
