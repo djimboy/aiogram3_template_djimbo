@@ -13,6 +13,17 @@ def clear_html(get_text):
     return get_text
 
 
+# Clear spaces in list
+def clear_list(get_list):
+    if "" in get_list:
+        get_list.remove("")
+
+    if " " in get_list:
+        get_list.remove(" ")
+
+    return get_list
+
+
 # Split list into several parts
 def split_messages(get_list, count):
     return [get_list[i:i + count] for i in range(0, len(get_list), count)]
@@ -45,13 +56,8 @@ def get_unix():
 
 
 # Format rate amount
-def format_rate(rate, around=False):
-    rate = str(round(float(rate), 2))
-
-    if "," in rate:
-        rate = float(rate.replace(",", "."))
-
-    len_rate = str(int(float(rate)))
+def format_rate(rate):
+    len_rate = str(int(rate))
 
     if len(len_rate) == 3:
         get_rate = str(len_rate)
@@ -70,12 +76,8 @@ def format_rate(rate, around=False):
     elif len(len_rate) == 10:
         get_rate = f"{len_rate[0:1]} {len_rate[1:4]} {len_rate[4:7]} {len_rate[7:]}"
 
-    if not around:
-        if "." in rate:
-            dot_amount = rate.find(".")
-            get_rate += f"{rate[dot_amount:]}"
-
     return get_rate
+
 
 ######################################## NUMBERS ########################################
 # Converting a number to a real
