@@ -41,9 +41,18 @@ async def admin_database(message: types.Message, state: FSMContext):
                                           f"<code>🕰 {get_date()}</code>")
 
 
+# Get logs.log
+async def admin_log(message: types.Message, state: FSMContext):
+    await state.clear()
+
+    await message.answer_document(FSInputFile("logs.log"),
+                                  caption=f"<code>🕰 {get_date()}</code>")
+
+
 def register_admin_menu(router: Router):
     router.message.register(admin_btn_one, text="Admin 1", state="*")
     router.message.register(admin_btn_two, text="Admin 2", state="*")
     router.message.register(admin_btn_three, text="Admin 3", state="*")
 
-    router.message.register(admin_database, commands="getbd", state="*")
+    router.message.register(admin_database, commands="db", state="*")
+    router.message.register(admin_log, commands="log", state="*")
