@@ -42,8 +42,8 @@ def rkb(text):
 def ikb(text, data=None, url=None, switch=None):
     if data is not None:
         return InlineKeyboardButton(text=text, callback_data=data)
-    if switch is not None:
-        return InlineKeyboardButton(text=text, switch_inline_query=data)
+    elif switch is not None:
+        return InlineKeyboardButton(text=text, switch_inline_query=switch)
     else:
         return InlineKeyboardButton(text=text, url=url)
 
