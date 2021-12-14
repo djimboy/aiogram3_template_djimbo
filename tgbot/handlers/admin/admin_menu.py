@@ -41,7 +41,7 @@ async def admin_database(message: types.Message, state: FSMContext):
                                           f"<code>🕰 {get_date()}</code>")
 
 
-# Get logs.log
+# Get logs
 async def admin_log(message: types.Message, state: FSMContext):
     await state.clear()
 
