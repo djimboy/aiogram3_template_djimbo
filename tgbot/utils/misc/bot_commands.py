@@ -20,4 +20,7 @@ async def set_commands(bot: Bot):
     await bot.set_my_commands(default_commands)
 
     for admin in get_admins():
-        await bot.set_my_commands(admin_commands, scope=BotCommandScopeChat(chat_id=admin))
+        try:
+            await bot.set_my_commands(admin_commands, scope=BotCommandScopeChat(chat_id=admin))
+        except:
+            pass
