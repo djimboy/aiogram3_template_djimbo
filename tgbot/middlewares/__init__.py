@@ -6,5 +6,5 @@ from tgbot.middlewares.throttling import ThrottlingMiddleware
 
 
 def setup_middlwares(router: Router):
-    router.message.outer_middleware(ThrottlingMiddleware())
+    router.message.middleware(ThrottlingMiddleware())
     router.message.outer_middleware(ExistsUserMiddleware())
