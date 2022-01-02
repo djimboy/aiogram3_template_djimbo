@@ -1,9 +1,8 @@
 # - *- coding: utf- 8 - *-
 import random
 import time
-from datetime import datetime
-
 from aiogram.types import InlineKeyboardButton, KeyboardButton
+from datetime import datetime
 
 
 # Clear HTML tags
@@ -22,9 +21,6 @@ def clear_list(get_list: list):
     if " " in get_list:
         get_list.remove(" ")
 
-    if "\r" in get_list:
-        get_list.remove("\r")
-
     return get_list
 
 
@@ -39,11 +35,9 @@ def rkb(text):
 
 
 # Build inline button
-def ikb(text, data=None, url=None, switch=None):
+def ikb(text, data=None, url=None):
     if data is not None:
         return InlineKeyboardButton(text=text, callback_data=data)
-    elif switch is not None:
-        return InlineKeyboardButton(text=text, switch_inline_query=switch)
     else:
         return InlineKeyboardButton(text=text, url=url)
 
@@ -68,6 +62,21 @@ def generate_password(len_password: int):
     random_chars = "".join([random.choice(passwd) for x in range(len_password)])
 
     return random_chars
+
+
+# Convert days
+def convert_day(day):
+    day = int(day)
+    days = ["день", "дня", "дней"]
+
+    if day % 10 == 1 and day % 100 != 11:
+        count = 0
+    elif 2 <= day % 10 <= 4 and (day % 100 < 10 or day % 100 >= 20):
+        count = 1
+    else:
+        count = 2
+
+    return f"{day} {days[count]}"
 
 
 # Format rate amount
