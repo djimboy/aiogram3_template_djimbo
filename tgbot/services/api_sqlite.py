@@ -118,5 +118,5 @@ def create_bdx():
                         "increment INTEGER PRIMARY KEY AUTOINCREMENT, "
                         "user_id INTEGER, user_login TEXT, user_name TEXT, "
                         "user_surname TEXT, user_date TIMESTAMP, user_unix INTEGER)")
-            con.commit()
             print("DB was not found(1/1) | Creating...")
+        con.commit()
