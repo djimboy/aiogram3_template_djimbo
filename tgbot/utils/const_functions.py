@@ -7,8 +7,9 @@ from datetime import datetime
 
 # Clear HTML tags
 def clear_html(get_text: str):
-    if "<" in get_text: get_text = get_text.replace("<", "*")
-    if ">" in get_text: get_text = get_text.replace(">", "*")
+    if get_text is not None:
+        if "<" in get_text: get_text = get_text.replace("<", "*")
+        if ">" in get_text: get_text = get_text.replace(">", "*")
 
     return get_text
 
