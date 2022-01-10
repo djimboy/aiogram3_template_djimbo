@@ -27,7 +27,7 @@ async def main():
     scheduler.start()
 
     bot = Bot(token=BOT_TOKEN, parse_mode="HTML")
-    request = RequestsSession()
+    rSession = RequestsSession()
 
     # Create routers
     admin_router = Router()
@@ -59,9 +59,9 @@ async def main():
         logger.info("Bot was started")
 
         await bot.get_updates(offset=-1)
-        await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types(), request=request)
+        await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types(), request=rSession)
     finally:
-        await request.close()
+        await rSession.close()
         await bot.session.close()
 
 
