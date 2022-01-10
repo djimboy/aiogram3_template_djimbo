@@ -59,7 +59,7 @@ async def main():
         logger.info("Bot was started")
 
         await bot.get_updates(offset=-1)
-        await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types(), request=rSession)
+        await dp.start_polling(bot, allowed_updates=dp.resolve_used_update_types(), rSession=rSession)
     finally:
         await rSession.close()
         await bot.session.close()
