@@ -16,9 +16,9 @@ from tgbot.utils.misc.bot_logging import start_logging
 from tgbot.utils.misc_functions import auto_backup, on_startup_notify
 
 
-# Start sheduler functions
+# Запуск шедулеров
 async def scheduler_start(bot):
-    scheduler.add_job(auto_backup, "interval", seconds=43200, args=(bot,))  # Autobackup every 43200 seconds
+    scheduler.add_job(auto_backup, "interval", seconds=43200, args=(bot,))  # Автобэкап каждые 43200 секунд
 
 
 async def main():
@@ -29,24 +29,24 @@ async def main():
     bot = Bot(token=BOT_TOKEN, parse_mode="HTML")
     rSession = RequestsSession()
 
-    # Create routers
+    # Создание роутеров
     admin_router = Router()
     user_router = Router()
 
-    # Build dispatcher and connect to routers
+    # Создание диспетчера и подключение роутеров
     dp = Dispatcher()
     dp.include_router(admin_router)
     dp.include_router(user_router)
 
-    # Setup middlawares
+    # Подключение мидлварей
     setup_middlwares(admin_router)
     setup_middlwares(user_router)
 
-    # Setup filters
+    # Подключение фильтров
     admin_router.message.filter(F.from_user.id.in_(get_admins()) & F.chat.type == "private")
     user_router.message.filter(F.chat.type == "private")
 
-    # Setup handlers
+    # Подключение хендлеров
     setup_admin_handlers(admin_router)
     setup_user_handlers(user_router)
 
@@ -69,7 +69,7 @@ if __name__ == "__main__":
     logger = start_logging()
 
     try:
-        # Fix "RuntimeError: Event loop is closed" for Windows
+        # Исправление ошибки "RuntimeError: Event loop is closed" на Windows
         if sys.version_info[0] == 3 and sys.version_info[1] >= 8 and sys.platform.startswith("win"):
             asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 

@@ -1,13 +1,13 @@
 # - *- coding: utf- 8 - *-
 import logging
 
-
 from colorlog import ColoredFormatter
 
 
 # Build logging
 def start_logging():
-    log_formatter_file = logging.Formatter(u"[%(levelname)s] [%(asctime)s] | [%(filename)s LINE:%(lineno)d] | %(message)s")
+    log_formatter_file = logging.Formatter(
+        u"[%(levelname)s] [%(asctime)s] | [%(filename)s LINE:%(lineno)d] | %(message)s")
     log_formatter_console = ColoredFormatter(
         "%(cyan)s%(asctime)s %(blue)s| %(log_color)s%(levelname)s %(blue)s"
         "| %(purple)s%(filename)s:%(lineno)d %(blue)s| %(message)s",

@@ -6,17 +6,17 @@ from aiogram.types import CallbackQuery
 from tgbot.keyboards.reply import menu_frep
 
 
-# Processing callback the message deletion
+# Колбэк с удалением сообщения
 async def processing_callback_remove(call: CallbackQuery, state: FSMContext):
     await call.message.delete()
 
 
-# Processing callback the inline button processing
+# Колбэк с обработкой кнопки
 async def processing_callback_answer(call: CallbackQuery, state: FSMContext):
     await call.answer(cache_time=60)
 
 
-# Processing all callbacks with empty state
+# Колбэк с обработкой удаления сообщений потерявших стейт
 async def processing_callback_missed(call: CallbackQuery, state: FSMContext):
     try:
         await call.message.delete()
@@ -28,7 +28,7 @@ async def processing_callback_missed(call: CallbackQuery, state: FSMContext):
                               reply_markup=menu_frep(call.from_user.id))
 
 
-# Processing all unknown messages
+# Обработка всех неизвестных команд
 async def processing_message_missed(message: types.Message):
     await message.answer("<b>♦ Неизвестная команда.</b>\n"
                          "▶ Введите /start")

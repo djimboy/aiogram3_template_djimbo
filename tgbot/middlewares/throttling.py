@@ -5,6 +5,7 @@ from aiogram import BaseMiddleware, types
 from aiogram.dispatcher.event.handler import HandlerObject
 
 
+# Антиспам
 class ThrottlingMiddleware(BaseMiddleware):
     def __init__(self, sd=False, default_rate: int = 0.5) -> None:
         self.limiters = {}

@@ -3,7 +3,7 @@ from aiogram import types
 from aiogram.dispatcher.filters import BaseFilter
 
 
-# Test filter
+# Тестовый фильтр
 class IsTest(BaseFilter):
     async def __call__(self, message: types.Message):
         if "test" in ["test"]:

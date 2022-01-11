@@ -7,6 +7,7 @@ from tgbot.handlers.z_all_errors import register_all_errors
 from tgbot.handlers.z_all_missed import register_all_missed
 
 
+# Подключение хендлеров для юзера
 def setup_user_handlers(router: Router):
     register_all_errors(router)
     register_main_start(router)

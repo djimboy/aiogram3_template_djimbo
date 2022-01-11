@@ -5,7 +5,7 @@ from aiogram.dispatcher.fsm.context import FSMContext
 from tgbot.keyboards.inline import test_inl
 
 
-# Button processing - User 1
+# Кнопка - User 1
 async def user_btn_one(message: types.Message, state: FSMContext):
     await state.clear()
 
@@ -13,7 +13,7 @@ async def user_btn_one(message: types.Message, state: FSMContext):
                          reply_markup=test_inl)
 
 
-# Button processing - User 2
+# Кнопка - User 2
 async def user_btn_two(message: types.Message, state: FSMContext):
     await state.clear()
 
@@ -21,7 +21,7 @@ async def user_btn_two(message: types.Message, state: FSMContext):
                          reply_markup=test_inl)
 
 
-# Button processing - User 3
+# Кнопка - User 3
 async def user_btn_three(message: types.Message, state: FSMContext):
     await state.clear()
 

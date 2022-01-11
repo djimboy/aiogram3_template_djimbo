@@ -6,7 +6,7 @@ from aiogram.dispatcher.fsm.context import FSMContext
 from tgbot.keyboards.reply import menu_frep
 
 
-# Processing commands - /start
+# Команда - /start
 async def main_start(message: types.Message, state: FSMContext):
     await state.clear()
 

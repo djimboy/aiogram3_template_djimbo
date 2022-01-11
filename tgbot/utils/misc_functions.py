@@ -3,16 +3,16 @@ from aiogram import Bot
 from aiogram.types import FSInputFile
 
 from tgbot.config import get_admins, database_path
-from tgbot.utils.free_functions import get_date
+from tgbot.utils.const_functions import get_date
 
 
-# Action after launching the bot (sending a message to all admins that the bot is running)
+# Выполнение функции после запуска бота (рассылка админам о запуске бота)
 async def on_startup_notify(bot: Bot):
     if len(get_admins()) >= 1:
         await send_admins(bot, "<b>✅ Бот был запущен</b>")
 
 
-# Automatic backups
+# Автоматические бэкапы БД
 async def auto_backup(bot: Bot):
     document = FSInputFile(database_path)
 
@@ -23,7 +23,7 @@ async def auto_backup(bot: Bot):
                                         f"<code>🕰 {get_date()}</code>")
 
 
-# Sending a message to all admins
+# Отправка сообщения всем админам
 async def send_admins(bot: Bot, message, markup=None, not_me=0):
     for admin in get_admins():
         try:

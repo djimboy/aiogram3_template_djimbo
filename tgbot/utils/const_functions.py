@@ -1,11 +1,12 @@
 # - *- coding: utf- 8 - *-
 import random
 import time
-from aiogram.types import InlineKeyboardButton, KeyboardButton
 from datetime import datetime
 
+from aiogram.types import InlineKeyboardButton, KeyboardButton
 
-# Clear HTML tags
+
+# Очистка HTML тэгов
 def clear_html(get_text: str):
     if get_text is not None:
         if "<" in get_text: get_text = get_text.replace("<", "*")
@@ -14,7 +15,7 @@ def clear_html(get_text: str):
     return get_text
 
 
-# Clear spaces in list
+# Очистка пробелов в списке
 def clear_list(get_list: list):
     if "" in get_list:
         get_list.remove("")
@@ -25,17 +26,17 @@ def clear_list(get_list: list):
     return get_list
 
 
-# Split list into several parts
+# Разбив списка на несколько частей
 def split_messages(get_list: list, count: int):
     return [get_list[i:i + count] for i in range(0, len(get_list), count)]
 
 
-# Build replay button
+# Генерация реплай кнопки
 def rkb(text):
     return KeyboardButton(text=text)
 
 
-# Build inline button
+# Генерация инлайн кнопки
 def ikb(text, data=None, url=None):
     if data is not None:
         return InlineKeyboardButton(text=text, callback_data=data)
@@ -43,7 +44,7 @@ def ikb(text, data=None, url=None):
         return InlineKeyboardButton(text=text, url=url)
 
 
-# Get date
+# Получение даты
 def get_date():
     dt = datetime.today().replace(microsecond=0)
     dt = dt.strftime("%d.%m.%Y %H:%M:%S")
@@ -51,12 +52,12 @@ def get_date():
     return dt
 
 
-# Get unix date
+# Получение юникс даты
 def get_unix():
     return int(time.time()) + 10800
 
 
-# Generate passowrd
+# Генерация пароля
 def generate_password(len_password: int):
     passwd = list("1234567890abcdefghigklmnopqrstuvyxwzABCDEFGHIGKLMNOPQRSTUVYXWZ")
     random.shuffle(passwd)
@@ -65,7 +66,7 @@ def generate_password(len_password: int):
     return random_chars
 
 
-# Convert days
+# Корректный вывод слов - День
 def convert_day(day):
     day = int(day)
     days = ["день", "дня", "дней"]
@@ -80,7 +81,7 @@ def convert_day(day):
     return f"{day} {days[count]}"
 
 
-# Format rate amount
+# Форматирование числа в читаемый вид
 def format_rate(rate):
     len_rate = str(int(rate))
 
@@ -105,7 +106,7 @@ def format_rate(rate):
 
 
 ######################################## NUMBERS ########################################
-# Converting a number to a real
+# Конвертация числа в вещественное
 def to_float(get_number):
     if "," in get_number:
         get_number = get_number.replace(",", ".")
@@ -118,7 +119,7 @@ def to_float(get_number):
     return get_number
 
 
-# Checking a number for a real
+# Проверка числа на вещественное
 def is_float(get_number):
     try:
         if "," in get_number:
@@ -130,7 +131,7 @@ def is_float(get_number):
         return False
 
 
-# Converting a number to an integer
+# Конвертация числа в целочисленное
 def to_int(get_number):
     if "," in get_number:
         get_number = get_number.replace(",", ".")
@@ -140,7 +141,7 @@ def to_int(get_number):
     return get_number
 
 
-# Checking a number for an integer
+# Проверка числа на целочисленное
 def is_int(get_number):
     if get_number.isdigit():
         return True

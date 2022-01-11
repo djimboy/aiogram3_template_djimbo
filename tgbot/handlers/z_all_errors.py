@@ -8,7 +8,7 @@ from tgbot.utils.misc.bot_logging import start_logging
 logger = start_logging()
 
 
-# Processing errors
+# Обработка ошибок
 async def errors_handler(update: Update, exception: TelegramAPIError):
     logger.exception(
         f"{str(exception)}.\n"

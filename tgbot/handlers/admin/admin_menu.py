@@ -5,10 +5,10 @@ from aiogram.types import FSInputFile
 
 from tgbot.config import database_path
 from tgbot.keyboards.inline import test_inl
-from tgbot.utils.free_functions import get_date
+from tgbot.utils.const_functions import get_date
 
 
-# Button processing - Admin 1
+# Кнопка - Admin 1
 async def admin_btn_one(message: types.Message, state: FSMContext):
     await state.clear()
 
@@ -16,7 +16,7 @@ async def admin_btn_one(message: types.Message, state: FSMContext):
                          reply_markup=test_inl)
 
 
-# Button processing - Admin 2
+# Кнопка - Admin 2
 async def admin_btn_two(message: types.Message, state: FSMContext):
     await state.clear()
 
@@ -24,7 +24,7 @@ async def admin_btn_two(message: types.Message, state: FSMContext):
                          reply_markup=test_inl)
 
 
-# Button processing - Admin 3
+# Кнопка - Admin 3
 async def admin_btn_three(message: types.Message, state: FSMContext):
     await state.clear()
 
