@@ -1,8 +1,9 @@
 # - *- coding: utf- 8 - *-
 import random
 import time
-from aiogram.types import InlineKeyboardButton, KeyboardButton
 from datetime import datetime
+
+from aiogram.types import InlineKeyboardButton, KeyboardButton
 
 
 # Clear HTML tags
