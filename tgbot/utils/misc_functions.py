@@ -3,7 +3,7 @@ from aiogram import Bot
 from aiogram.types import FSInputFile
 
 from tgbot.config import get_admins, database_path
-from tgbot.utils.free_functions import get_date
+from tgbot.utils.const_functions import get_date
 
 
 # Action after launching the bot (sending a message to all admins that the bot is running)

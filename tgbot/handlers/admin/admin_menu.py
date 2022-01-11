@@ -5,7 +5,7 @@ from aiogram.types import FSInputFile
 
 from tgbot.config import database_path
 from tgbot.keyboards.inline import test_inl
-from tgbot.utils.free_functions import get_date
+from tgbot.utils.const_functions import get_date
 
 
 # Button processing - Admin 1

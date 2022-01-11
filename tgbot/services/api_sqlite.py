@@ -2,7 +2,7 @@
 import sqlite3
 
 from tgbot.config import database_path
-from tgbot.utils.free_functions import get_unix, get_date
+from tgbot.utils.const_functions import get_unix, get_date
 
 
 def dict_factory(cursor, row):

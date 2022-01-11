@@ -2,7 +2,7 @@
 from aiogram import BaseMiddleware, types
 
 from tgbot.services.api_sqlite import get_userx, add_userx, delete_userx, update_userx
-from tgbot.utils.free_functions import clear_html
+from tgbot.utils.const_functions import clear_html
 
 
 class ExistsUserMiddleware(BaseMiddleware):
