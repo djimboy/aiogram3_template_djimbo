@@ -5,7 +5,7 @@ from tgbot.middlewares.exists_user import ExistsUserMiddleware
 from tgbot.middlewares.throttling import ThrottlingMiddleware
 
 
-# Подключение мидлварей
+# Подключение миддлварей
 def setup_middlwares(router: Router):
     router.message.middleware(ThrottlingMiddleware())
     router.message.outer_middleware(ExistsUserMiddleware())
