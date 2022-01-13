@@ -147,3 +147,8 @@ def is_int(get_number):
         return True
     else:
         return False
+
+
+# Преобразование длинных вещественных чисел в читаемый вид
+def show_floats(amount):
+    return f"{float(amount):.8f}"
