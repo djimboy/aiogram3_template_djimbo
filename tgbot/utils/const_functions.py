@@ -1,8 +1,9 @@
 # - *- coding: utf- 8 - *-
 import random
 import time
-from aiogram.types import InlineKeyboardButton, KeyboardButton
 from datetime import datetime
+
+from aiogram.types import InlineKeyboardButton, KeyboardButton
 
 
 # Clear HTML tags
@@ -146,3 +147,8 @@ def is_int(get_number):
         return True
     else:
         return False
+
+
+# Converting long real numbers to a readable form
+def show_floats(amount):
+    return f"{float(amount):.8f}"
