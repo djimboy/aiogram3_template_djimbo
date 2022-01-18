@@ -15,7 +15,7 @@ admin_commands = [
 ]
 
 
-# Set commands
+# Установка команд
 async def set_commands(bot: Bot):
     await bot.set_my_commands(user_commands)
 
