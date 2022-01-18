@@ -5,7 +5,7 @@ from aiogram.types import BotCommandScopeChat
 from tgbot.config import get_admins
 
 # Commands for users
-default_commands = [
+user_commands = [
     types.BotCommand(command="start", description="♻ Перезапустить бота"),
 ]
 
@@ -17,7 +17,7 @@ admin_commands = [
 
 # Set commands
 async def set_commands(bot: Bot):
-    await bot.set_my_commands(default_commands)
+    await bot.set_my_commands(user_commands)
 
     for admin in get_admins():
         try:
