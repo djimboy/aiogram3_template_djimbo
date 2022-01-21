@@ -1,26 +1,23 @@
 # - *- coding: utf- 8 - *-
-from aiogram import types, Bot
-from aiogram.types import BotCommandScopeChat
+from aiogram import Bot
+from aiogram.types import BotCommand, BotCommandScopeChat
 
 from tgbot.config import get_admins
 
-# Commands for users
-default_commands = [
-    types.BotCommand(command="start", description="♻ Перезапустить бота"),
+# Команды для юзеров
+user_commands = [
+    BotCommand(command="start", description="♻ Перезапустить бота"),
 ]
 
-# Commands for admins
+# Команды для админов
 admin_commands = [
-    types.BotCommand(command="start", description="♻ Перезапустить бота"),
+    BotCommand(command="start", description="♻ Перезапустить бота"),
 ]
 
 
-# Set commands
+# Установка команд
 async def set_commands(bot: Bot):
-    await bot.set_my_commands(default_commands)
+    await bot.set_my_commands(user_commands)
 
     for admin in get_admins():
-        try:
-            await bot.set_my_commands(admin_commands, scope=BotCommandScopeChat(chat_id=admin))
-        except:
-            pass
+        await bot.set_my_commands(admin_commands, scope=BotCommandScopeChat(chat_id=admin))

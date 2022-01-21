@@ -4,7 +4,7 @@ import logging
 from colorlog import ColoredFormatter
 
 
-# Build logging
+# Создание логгирования
 def start_logging():
     log_formatter_file = logging.Formatter(
         u"[%(levelname)s] [%(asctime)s] | [%(filename)s LINE:%(lineno)d] | %(message)s")
