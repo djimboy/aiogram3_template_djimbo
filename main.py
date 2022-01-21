@@ -39,8 +39,7 @@ async def main():
     dp.include_router(user_router)
 
     # Подключение мидлварей
-    setup_middlwares(admin_router)
-    setup_middlwares(user_router)
+    setup_middlwares(dp)
 
     # Подключение фильтров
     admin_router.message.filter(F.from_user.id.in_(get_admins()) & F.chat.type == "private")
