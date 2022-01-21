@@ -36,5 +36,7 @@ class ExistsUserMiddleware(BaseMiddleware):
                 if user_login is not None:
                     if user_login.lower() != get_user_id['user_login']:
                         update_userx(get_user_id['user_id'], user_login=user_login.lower())
+                else:
+                    update_userx(get_user['user_id'], user_login="")
 
         return await handler(event, data)
