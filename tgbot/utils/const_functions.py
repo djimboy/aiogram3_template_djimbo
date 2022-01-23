@@ -117,13 +117,13 @@ def format_rate(rate, around=False):
 
 ######################################## ЧИСЛА ########################################
 # Конвертация числа в вещественное
-def to_float(get_number):
-    if "," in get_number:
-        get_number = get_number.replace(",", ".")
+def to_float(get_number, remains=2):
+    if "," in str(get_number):
+        get_number = str(get_number).replace(",", ".")
 
-    get_number = round(float(get_number), 2)
+    get_number = round(float(get_number), remains)
 
-    if str(get_number).split(".")[1] == "0":
+    if str(show_floats(get_number)).split(".")[1] == "0":
         get_number = int(get_number)
 
     return get_number
@@ -132,13 +132,13 @@ def to_float(get_number):
 # Проверка числа на вещественное
 def is_float(get_number):
     try:
-        if "," in get_number:
-            get_number = get_number.replace(",", ".")
+        if "," in str(get_number):
+            get_number = str(get_number).replace(",", ".")
         float(get_number)
 
-        return True
-    except ValueError:
         return False
+    except ValueError:
+        return True
 
 
 # Конвертация числа в целочисленное
