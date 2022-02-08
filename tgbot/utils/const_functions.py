@@ -129,7 +129,7 @@ def to_float(get_number, remains=2):
             if get_last[:-1] == "0":
                 get_last = get_last[:-1]
             else:
-                get_number = round(float(f"{int(get_number)}.{0}"), 2)
+                get_number = round(float(f"{int(get_number)}.{get_last}"), 2)
                 if "0" in str(get_number).split(".")[1]:
                     get_number = int(get_number)
                 break
