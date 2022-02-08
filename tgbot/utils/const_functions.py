@@ -122,8 +122,18 @@ def to_float(get_number, remains=2):
         get_number = str(get_number).replace(",", ".")
 
     get_number = round(float(get_number), remains)
+    get_last = str(show_floats(get_number)).split(".")[1]
 
-    if str(show_floats(get_number)).split(".")[1] == "0":
+    if "0" in get_last:
+        while True:
+            if get_last[:-1] == "0":
+                get_last = get_last[:-1]
+            else:
+                get_number = round(float(f"{int(get_number)}.{0}"), 2)
+                if "0" in str(get_number).split(".")[1]:
+                    get_number = int(get_number)
+                break
+    else:
         get_number = int(get_number)
 
     return get_number
