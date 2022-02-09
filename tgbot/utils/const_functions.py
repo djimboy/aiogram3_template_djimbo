@@ -115,6 +115,40 @@ def format_rate(rate, around=False):
     return get_rate
 
 
+# Умная отправка сообщений
+async def smart_send(bot: Bot, message: types.Message, user_id, text_add=None, reply=None):
+    if message.text is not None:
+        get_text = message.text
+    elif message.caption is not None:
+        get_text = message.caption
+    else:
+        get_text = ""
+
+    if text_add is not None:
+        get_text = text_add.format(get_text)
+
+    if message.photo is not None:
+        await bot.send_photo(user_id, message.photo[-1].file_id, caption=get_text, reply_markup=reply)
+    elif message.video is not None:
+        await bot.send_video(user_id, message.video.file_id, caption=get_text, reply_markup=reply)
+    elif message.document is not None:
+        await bot.send_document(user_id, message.document.file_id, caption=get_text, reply_markup=reply)
+    elif message.audio is not None:
+        await bot.send_audio(user_id, message.audio.file_id, caption=get_text, reply_markup=reply)
+    elif message.voice is not None:
+        await bot.send_voice(user_id, message.voice.file_id, caption=get_text, reply_markup=reply)
+    elif message.animation is not None:
+        await bot.send_animation(user_id, message.animation.file_id, reply_markup=reply)
+    elif message.sticker is not None:
+        await bot.send_sticker(user_id, message.sticker.file_id, reply_markup=reply)
+    elif message.dice is not None:
+        await bot.send_dice(user_id, message.dice.emoji, reply_markup=reply)
+    elif message.location is not None:
+        await bot.send_location(user_id, latitude=message.location.latitude, longitude=message.location.longitude,
+                                reply_markup=reply)
+    else:
+        await bot.send_message(user_id, get_text)
+
 ######################################## ЧИСЛА ########################################
 # Конвертация числа в вещественное
 def to_float(get_number, remains=2):
