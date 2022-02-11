@@ -205,4 +205,4 @@ def is_int(get_number):
 
 # Converting long real numbers to a readable form
 def show_floats(amount):
-    return f"{float(amount):.8f}"
+    return f"{float(amount):.{len(str(amount).split('.')[1])}f}"
