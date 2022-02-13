@@ -1,5 +1,5 @@
 # - *- coding: utf- 8 - *-
-from aiogram import Router, Dispatcher
+from aiogram import Dispatcher
 
 from tgbot.middlewares.exists_user import ExistsUserMiddleware
 from tgbot.middlewares.throttling import ThrottlingMiddleware

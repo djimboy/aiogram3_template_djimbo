@@ -17,8 +17,8 @@ def dict_factory(cursor, row):
 # con.row_factory = sqlite3.Row
 
 ####################################################################################################
-####################################### FORMATTING REQUESTS ########################################
-# Formatting a request with arguments
+##################################### ФОРМАТИРОВАНИЕ ЗАПРОСОВ ######################################
+# Форматирование запросов с аргументами
 def update_format_with_args(sql, parameters: dict):
     if "XXX" not in sql:
         sql += " XXX "
@@ -31,7 +31,7 @@ def update_format_with_args(sql, parameters: dict):
     return sql, list(parameters.values())
 
 
-# Formatting a request without arguments
+# Форматирование запросов без аргументов
 def get_format_args(sql, parameters: dict):
     sql = f"{sql} WHERE "
 
@@ -42,9 +42,9 @@ def get_format_args(sql, parameters: dict):
     return sql, list(parameters.values())
 
 
-######################################### DATABASE REQUESTS ########################################
+####################################### ЗАПРОСЫ К БАЗЕ ДАННЫХ ######################################
 ####################################################################################################
-# Add user
+# Добавление пользователя
 def add_userx(user_id, user_login, user_name, user_surname):
     with sqlite3.connect(database_path) as con:
         con.row_factory = dict_factory
@@ -55,7 +55,7 @@ def add_userx(user_id, user_login, user_name, user_surname):
         con.commit()
 
 
-# Get user
+# Получение пользователя
 def get_userx(**kwargs):
     with sqlite3.connect(database_path) as con:
         con.row_factory = dict_factory
@@ -64,7 +64,7 @@ def get_userx(**kwargs):
         return con.execute(sql, parameters).fetchone()
 
 
-# Get users
+# Получение пользователей
 def get_usersx(**kwargs):
     with sqlite3.connect(database_path) as con:
         con.row_factory = dict_factory
@@ -73,7 +73,7 @@ def get_usersx(**kwargs):
         return con.execute(sql, parameters).fetchall()
 
 
-# Get all users
+# Получение всех пользователей
 def get_all_usersx():
     with sqlite3.connect(database_path) as con:
         con.row_factory = dict_factory
@@ -81,7 +81,7 @@ def get_all_usersx():
         return con.execute(sql).fetchall()
 
 
-# Edit user
+# Редактирование пользователя
 def update_userx(user_id, **kwargs):
     with sqlite3.connect(database_path) as con:
         con.row_factory = dict_factory
@@ -92,7 +92,7 @@ def update_userx(user_id, **kwargs):
         con.commit()
 
 
-# Delete user
+# Удаление пользователя
 def delete_userx(**kwargs):
     with sqlite3.connect(database_path) as con:
         con.row_factory = dict_factory
@@ -102,13 +102,13 @@ def delete_userx(**kwargs):
         con.commit()
 
 
-######################################## CREATE DATABASE ######################################
-# Creating all tables for the database
+######################################## СОЗДАНИЕ БАЗЫ ДАННЫХ ######################################
+# Создание всех таблиц для Базы Данных
 def create_bdx():
     with sqlite3.connect(database_path) as con:
         con.row_factory = dict_factory
 
-        # Table with user data storage
+        # Таблица с хранением пользователей
         check_sql = con.execute("PRAGMA table_info(storage_users)").fetchall()
         check_create_users = [c for c in check_sql]
         if len(check_create_users) == 7:
