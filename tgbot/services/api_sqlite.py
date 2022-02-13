@@ -1,7 +1,7 @@
 # - *- coding: utf- 8 - *-
 import sqlite3
 
-from tgbot.config import database_path
+from tgbot.config import DATABASE_PATH
 from tgbot.utils.const_functions import get_unix, get_date
 
 
@@ -46,7 +46,7 @@ def get_format_args(sql, parameters: dict):
 ####################################################################################################
 # Add user
 def add_userx(user_id, user_login, user_name, user_surname):
-    with sqlite3.connect(database_path) as con:
+    with sqlite3.connect(DATABASE_PATH) as con:
         con.row_factory = dict_factory
         con.execute("INSERT INTO storage_users "
                     "(user_id, user_login, user_name, user_surname, user_date, user_unix) "
@@ -57,7 +57,7 @@ def add_userx(user_id, user_login, user_name, user_surname):
 
 # Get user
 def get_userx(**kwargs):
-    with sqlite3.connect(database_path) as con:
+    with sqlite3.connect(DATABASE_PATH) as con:
         con.row_factory = dict_factory
         sql = "SELECT * FROM storage_users"
         sql, parameters = get_format_args(sql, kwargs)
@@ -66,7 +66,7 @@ def get_userx(**kwargs):
 
 # Get users
 def get_usersx(**kwargs):
-    with sqlite3.connect(database_path) as con:
+    with sqlite3.connect(DATABASE_PATH) as con:
         con.row_factory = dict_factory
         sql = "SELECT * FROM storage_users"
         sql, parameters = get_format_args(sql, kwargs)
@@ -75,7 +75,7 @@ def get_usersx(**kwargs):
 
 # Get all users
 def get_all_usersx():
-    with sqlite3.connect(database_path) as con:
+    with sqlite3.connect(DATABASE_PATH) as con:
         con.row_factory = dict_factory
         sql = "SELECT * FROM storage_users"
         return con.execute(sql).fetchall()
@@ -83,7 +83,7 @@ def get_all_usersx():
 
 # Edit user
 def update_userx(user_id, **kwargs):
-    with sqlite3.connect(database_path) as con:
+    with sqlite3.connect(DATABASE_PATH) as con:
         con.row_factory = dict_factory
         sql = f"UPDATE storage_users SET"
         sql, parameters = update_format_with_args(sql, kwargs)
@@ -94,7 +94,7 @@ def update_userx(user_id, **kwargs):
 
 # Delete user
 def delete_userx(**kwargs):
-    with sqlite3.connect(database_path) as con:
+    with sqlite3.connect(DATABASE_PATH) as con:
         con.row_factory = dict_factory
         sql = "DELETE FROM storage_users"
         sql, parameters = get_format_args(sql, kwargs)
@@ -105,7 +105,7 @@ def delete_userx(**kwargs):
 ######################################## CREATE DATABASE ######################################
 # Creating all tables for the database
 def create_bdx():
-    with sqlite3.connect(database_path) as con:
+    with sqlite3.connect(DATABASE_PATH) as con:
         con.row_factory = dict_factory
 
         # Table with user data storage

@@ -1,48 +1,39 @@
 # - *- coding: utf- 8 - *-
-from aiogram import types, Router
+from aiogram import types, Router, Bot
 from aiogram.dispatcher.fsm.context import FSMContext
 from aiogram.types import FSInputFile
 
-from tgbot.config import database_path
+from tgbot.config import DATABASE_PATH
 from tgbot.keyboards.inline import test_inl
+from tgbot.keyboards.reply import test_rep
 from tgbot.utils.const_functions import get_date
 
 
-# Button processing - Admin 1
-async def admin_btn_one(message: types.Message, state: FSMContext):
+# Button - Admin Inline
+async def admin_button_inline(message: types.Message, bot: Bot, rSession, state: FSMContext):
     await state.clear()
 
-    await message.answer("Click Button - Admin 1",
-                         reply_markup=test_inl)
+    await message.answer("Click Button - Admin Inline", reply_markup=test_inl)
 
 
-# Button processing - Admin 2
-async def admin_btn_two(message: types.Message, state: FSMContext):
+# Button - Admin Reply
+async def admin_button_reply(message: types.Message, bot: Bot, rSession, state: FSMContext):
     await state.clear()
 
-    await message.answer("Click Button - Admin 2",
-                         reply_markup=test_inl)
+    await message.answer("Click Button - Admin Reply", reply_markup=test_rep)
 
 
-# Button processing - Admin 3
-async def admin_btn_three(message: types.Message, state: FSMContext):
+# Get Database
+async def admin_database(message: types.Message, bot: Bot, rSession, state: FSMContext):
     await state.clear()
 
-    await message.answer("Click Button - Admin 2",
-                         reply_markup=test_inl)
-
-
-# Get database
-async def admin_database(message: types.Message, state: FSMContext):
-    await state.clear()
-
-    await message.answer_document(FSInputFile(database_path),
+    await message.answer_document(FSInputFile(DATABASE_PATH),
                                   caption=f"<b>📦 BACKUP</b>\n"
                                           f"<code>🕰 {get_date()}</code>")
 
 
 # Get logs
-async def admin_log(message: types.Message, state: FSMContext):
+async def admin_log(message: types.Message, bot: Bot, rSession, state: FSMContext):
     await state.clear()
 
     await message.answer_document(FSInputFile("logs.log"),
@@ -50,9 +41,8 @@ async def admin_log(message: types.Message, state: FSMContext):
 
 
 def register_admin_menu(router: Router):
-    router.message.register(admin_btn_one, text="Admin 1", state="*")
-    router.message.register(admin_btn_two, text="Admin 2", state="*")
-    router.message.register(admin_btn_three, text="Admin 3", state="*")
+    router.message.register(admin_button_inline, text="Admin Inline", state="*")
+    router.message.register(admin_button_reply, text="Admin Reply", state="*")
 
     router.message.register(admin_database, commands="db", state="*")
     router.message.register(admin_log, commands="log", state="*")

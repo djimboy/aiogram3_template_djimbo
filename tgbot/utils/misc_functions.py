@@ -2,19 +2,19 @@
 from aiogram import Bot
 from aiogram.types import FSInputFile
 
-from tgbot.config import get_admins, database_path
+from tgbot.config import get_admins, DATABASE_PATH
 from tgbot.utils.const_functions import get_date
 
 
 # Action after launching the bot (sending a message to all admins that the bot is running)
 async def on_startup_notify(bot: Bot):
     if len(get_admins()) >= 1:
-        await send_admins(bot, "<b>✅ Бот был запущен</b>")
+        await send_admins(bot, "<b>✅ The bot was launched</b>")
 
 
 # Automatic backups
 async def auto_backup(bot: Bot):
-    document = FSInputFile(database_path)
+    document = FSInputFile(DATABASE_PATH)
 
     for admin in get_admins():
         await bot.send_document(admin,

@@ -3,6 +3,7 @@ import random
 import time
 from datetime import datetime
 
+from aiogram import Bot, types
 from aiogram.types import InlineKeyboardButton, KeyboardButton
 
 
@@ -148,6 +149,7 @@ async def smart_send(bot: Bot, message: types.Message, user_id, text_add=None, r
                                 reply_markup=reply)
     else:
         await bot.send_message(user_id, get_text)
+
 
 ######################################## NUMBERS ########################################
 # Converting a number to a real

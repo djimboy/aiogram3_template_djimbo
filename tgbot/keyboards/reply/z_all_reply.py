@@ -6,8 +6,8 @@ from tgbot.utils.const_functions import rkb
 # Test reply keyboard
 test_rep = ReplyKeyboardBuilder(
 ).row(
-    rkb("Test 1"),
-    rkb("Test 2"),
+    rkb("User 1"),
+    rkb("User 2"),
 ).row(
-    rkb("Test 3"),
-)
+    rkb("User 3"),
+).as_markup(resize_keyboard=True)
