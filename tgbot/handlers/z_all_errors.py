@@ -5,12 +5,10 @@ from aiogram.types import Update
 
 from tgbot.utils.misc.bot_logging import start_logging
 
-logger = start_logging()
-
 
 # Обработка ошибок
 async def errors_handler(update: Update, exception: TelegramAPIError):
-    logger.exception(
+    start_logging().exception(
         f"{str(exception)}.\n"
         f"Update: {update.dict()}"
     )

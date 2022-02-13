@@ -1,35 +1,35 @@
 # - *- coding: utf- 8 - *-
-from aiogram import types, Router
+from aiogram import types, Router, Bot
 from aiogram.dispatcher.fsm.context import FSMContext
 
 from tgbot.keyboards.inline import test_inl
+from tgbot.keyboards.inline.admin_inline import menu_finl
+from tgbot.keyboards.reply import test_rep
 
 
-# Кнопка - User 1
-async def user_btn_one(message: types.Message, state: FSMContext):
+# Кнопка - User Inline
+async def user_button_inline(message: types.Message, bot: Bot, rSession, state: FSMContext):
     await state.clear()
 
-    await message.answer("Click Button - User 1",
-                         reply_markup=test_inl)
+    await message.answer("Click Button - User Inline", reply_markup=test_inl)
 
 
-# Кнопка - User 2
-async def user_btn_two(message: types.Message, state: FSMContext):
+# Кнопка - User Reply
+async def user_button_reply(message: types.Message, bot: Bot, rSession, state: FSMContext):
     await state.clear()
 
-    await message.answer("Click Button - User 2",
-                         reply_markup=test_inl)
+    await message.answer("Click Button - User Reply", reply_markup=test_rep)
 
 
-# Кнопка - User 3
-async def user_btn_three(message: types.Message, state: FSMContext):
+# Команда - /inline
+async def user_command_inline(message: types.Message, bot: Bot, rSession, state: FSMContext):
     await state.clear()
 
-    await message.answer("Click Button - User 3",
-                         reply_markup=test_inl)
+    await message.answer("Click command - /inline", reply_markup=menu_finl(message.from_user.id))
 
 
 def register_user_menu(router: Router):
-    router.message.register(user_btn_one, text="User 1", state="*")
-    router.message.register(user_btn_two, text="User 2", state="*")
-    router.message.register(user_btn_three, text="User 3", state="*")
+    router.message.register(user_button_inline, text="User Inline", state="*")
+    router.message.register(user_button_reply, text="User Reply", state="*")
+
+    router.message.register(user_command_inline, commands="inline", state="*")

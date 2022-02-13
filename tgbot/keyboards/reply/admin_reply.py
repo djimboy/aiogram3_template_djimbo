@@ -9,12 +9,12 @@ from tgbot.utils.const_functions import rkb
 def menu_frep(user_id):
     keyboard = ReplyKeyboardBuilder(
     ).row(
-        rkb("User 1"), rkb("User 2"), rkb("User 3")
+        rkb("User Inline"), rkb("User Reply"),
     )
 
     if user_id in get_admins():
         keyboard.row(
-            rkb("Admin 1"), rkb("Admin 2"), rkb("Admin 3")
+            rkb("Admin Inline"), rkb("Admin Reply"),
         )
 
     return keyboard.as_markup(resize_keyboard=True)

@@ -3,6 +3,7 @@ import random
 import time
 from datetime import datetime
 
+from aiogram import Bot, types
 from aiogram.types import InlineKeyboardButton, KeyboardButton
 
 

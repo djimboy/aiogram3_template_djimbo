@@ -10,4 +10,4 @@ test_inl = InlineKeyboardBuilder(
     ikb("Test 2", data="..."),
 ).row(
     ikb("Test 3", data="..."),
-)
+).as_markup()

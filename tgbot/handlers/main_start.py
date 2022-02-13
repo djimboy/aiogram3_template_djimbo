@@ -10,7 +10,7 @@ from tgbot.keyboards.reply import menu_frep
 async def main_start(message: types.Message, state: FSMContext):
     await state.clear()
 
-    await message.answer("<b>🔸 Бот готов к использованию.</b>\n"
+    await message.answer("🔸 Бот готов к использованию.\n"
                          "🔸 Если не появились вспомогательные кнопки\n"
                          "▶ Введите /start",
                          reply_markup=menu_frep(message.from_user.id))
