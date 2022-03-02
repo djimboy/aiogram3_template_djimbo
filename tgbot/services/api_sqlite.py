@@ -5,6 +5,7 @@ from tgbot.config import DATABASE_PATH
 from tgbot.utils.const_functions import get_unix, get_date
 
 
+# Conversion of the received data into a dictionary form
 def dict_factory(cursor, row):
     d = {}
 
