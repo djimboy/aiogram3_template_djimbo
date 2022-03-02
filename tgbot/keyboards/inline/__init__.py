@@ -1,3 +1,3 @@
 # - *- coding: utf- 8 - *-
-from .admin_reply import *
-from .z_all_reply import *
+from .admin_inline import *
+from .z_all_inline import *
