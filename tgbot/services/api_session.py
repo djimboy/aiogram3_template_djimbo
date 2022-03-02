@@ -4,6 +4,7 @@ from typing import Optional
 import aiohttp
 
 
+# Asyncio session for requests
 class RequestsSession:
     def __init__(self) -> None:
         self._session: Optional[aiohttp.ClientSession] = None
