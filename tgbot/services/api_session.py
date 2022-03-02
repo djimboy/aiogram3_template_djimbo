@@ -4,7 +4,7 @@ from typing import Optional
 import aiohttp
 
 
-# Функция для асинхронных запросов
+# Асинхронная сессия для запросов
 class RequestsSession:
     def __init__(self) -> None:
         self._session: Optional[aiohttp.ClientSession] = None
