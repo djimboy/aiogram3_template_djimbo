@@ -21,6 +21,7 @@ async def scheduler_start(bot):
     scheduler.add_job(auto_backup, "interval", seconds=43200, args=(bot,))  # Autobackup every 43200 seconds
 
 
+# Launching the bot and functions
 async def main():
     create_bdx()
 
