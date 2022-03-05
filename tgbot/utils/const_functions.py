@@ -25,7 +25,7 @@ def clear_list(get_list: list):
         get_list.remove(" ")
 
     while "\r" in get_list:
-        get_list.remove(" ")
+        get_list.remove("\r")
 
     return get_list
 
