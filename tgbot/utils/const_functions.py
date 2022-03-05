@@ -18,10 +18,13 @@ def clear_html(get_text: str):
 
 # Очистка пробелов в списке
 def clear_list(get_list: list):
-    if "" in get_list:
+    while "" in get_list:
         get_list.remove("")
 
-    if " " in get_list:
+    while " " in get_list:
+        get_list.remove(" ")
+
+    while "\r" in get_list:
         get_list.remove(" ")
 
     return get_list
