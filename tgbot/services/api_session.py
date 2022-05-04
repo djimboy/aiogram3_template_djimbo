@@ -13,9 +13,11 @@ class RequestsSession:
         if self._session is None:
             new_session = aiohttp.ClientSession()
             self._session = new_session
+
         return self._session
 
     async def close(self) -> None:
         if self._session is None:
             return None
+
         await self._session.close()
