@@ -4,6 +4,9 @@ import logging
 import colorlog
 
 
+from tgbot.config import PATH_LOGS
+
+
 # Создание логгирования
 def start_logging():
     log_formatter_file = logging.Formatter("%(levelname)s | %(asctime)s | %(filename)s:%(lineno)d | %(message)s")
@@ -15,7 +18,7 @@ def start_logging():
     root_logger = logging.getLogger()
     root_logger.setLevel(logging.INFO)
 
-    file_handler = logging.FileHandler("logs.log", "w", "utf-8")
+    file_handler = logging.FileHandler(PATH_LOGS, "w", "utf-8")
     file_handler.setFormatter(log_formatter_file)
     file_handler.setLevel(logging.INFO)
 
