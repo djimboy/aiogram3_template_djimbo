@@ -9,7 +9,8 @@ config = configparser.ConfigParser()
 config.read("settings.ini")
 
 BOT_TOKEN = config["settings"]["token"].strip()
-DATABASE_PATH = "tgbot/data/database.db"
+PATH_DATABASE = "tgbot/data/database.db"  # Путь к БД
+PATH_LOGS = "tgbot/data/logs.log"  # Путь к Логам
 
 
 # Получение администраторов бота
