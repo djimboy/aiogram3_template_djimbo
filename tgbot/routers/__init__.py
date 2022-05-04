@@ -10,7 +10,7 @@ from tgbot.routers.z_all_missed import router_missed
 
 
 # Подключение всех роутеров
-def register_all_routes(dp: Dispatcher):
+def register_all_routers(dp: Dispatcher):
     # Создание образов роутера
     admin_router = Router()
     user_router = Router()
