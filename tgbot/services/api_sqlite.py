@@ -1,7 +1,7 @@
 # - *- coding: utf- 8 - *-
 import sqlite3
 
-from tgbot.config import DATABASE_PATH
+from tgbot.config import PATH_DATABASE
 from tgbot.utils.const_functions import get_unix, get_date
 
 
@@ -33,7 +33,7 @@ def update_format_with_args(sql, parameters: dict):
 
 
 # Форматирование запросов без аргументов
-def get_format_args(sql, parameters: dict):
+def update_format(sql, parameters: dict):
     sql = f"{sql} WHERE "
 
     sql += " AND ".join([
@@ -47,7 +47,7 @@ def get_format_args(sql, parameters: dict):
 ####################################################################################################
 # Добавление пользователя
 def add_userx(user_id, user_login, user_name, user_surname):
-    with sqlite3.connect(DATABASE_PATH) as con:
+    with sqlite3.connect(PATH_DATABASE) as con:
         con.row_factory = dict_factory
         con.execute("INSERT INTO storage_users "
                     "(user_id, user_login, user_name, user_surname, user_date, user_unix) "
@@ -58,25 +58,25 @@ def add_userx(user_id, user_login, user_name, user_surname):
 
 # Получение пользователя
 def get_userx(**kwargs):
-    with sqlite3.connect(DATABASE_PATH) as con:
+    with sqlite3.connect(PATH_DATABASE) as con:
         con.row_factory = dict_factory
         sql = "SELECT * FROM storage_users"
-        sql, parameters = get_format_args(sql, kwargs)
+        sql, parameters = update_format(sql, kwargs)
         return con.execute(sql, parameters).fetchone()
 
 
 # Получение пользователей
 def get_usersx(**kwargs):
-    with sqlite3.connect(DATABASE_PATH) as con:
+    with sqlite3.connect(PATH_DATABASE) as con:
         con.row_factory = dict_factory
         sql = "SELECT * FROM storage_users"
-        sql, parameters = get_format_args(sql, kwargs)
+        sql, parameters = update_format(sql, kwargs)
         return con.execute(sql, parameters).fetchall()
 
 
 # Получение всех пользователей
 def get_all_usersx():
-    with sqlite3.connect(DATABASE_PATH) as con:
+    with sqlite3.connect(PATH_DATABASE) as con:
         con.row_factory = dict_factory
         sql = "SELECT * FROM storage_users"
         return con.execute(sql).fetchall()
@@ -84,7 +84,7 @@ def get_all_usersx():
 
 # Редактирование пользователя
 def update_userx(user_id, **kwargs):
-    with sqlite3.connect(DATABASE_PATH) as con:
+    with sqlite3.connect(PATH_DATABASE) as con:
         con.row_factory = dict_factory
         sql = f"UPDATE storage_users SET"
         sql, parameters = update_format_with_args(sql, kwargs)
@@ -95,10 +95,10 @@ def update_userx(user_id, **kwargs):
 
 # Удаление пользователя
 def delete_userx(**kwargs):
-    with sqlite3.connect(DATABASE_PATH) as con:
+    with sqlite3.connect(PATH_DATABASE) as con:
         con.row_factory = dict_factory
         sql = "DELETE FROM storage_users"
-        sql, parameters = get_format_args(sql, kwargs)
+        sql, parameters = update_format(sql, kwargs)
         con.execute(sql, parameters)
         con.commit()
 
@@ -106,7 +106,7 @@ def delete_userx(**kwargs):
 ######################################## СОЗДАНИЕ БАЗЫ ДАННЫХ ######################################
 # Создание всех таблиц для Базы Данных
 def create_bdx():
-    with sqlite3.connect(DATABASE_PATH) as con:
+    with sqlite3.connect(PATH_DATABASE) as con:
         con.row_factory = dict_factory
 
         # Таблица с хранением пользователей
