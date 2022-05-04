@@ -3,20 +3,25 @@ from aiogram import types, Router
 from aiogram.dispatcher.fsm.context import FSMContext
 from aiogram.types import CallbackQuery
 
-from tgbot.keyboards.reply import menu_frep
+from tgbot.keyboards.admin_reply import menu_frep
+
+router_missed = Router()
 
 
 # Колбэк с удалением сообщения
+@router_missed.callback_query(text="close_this")
 async def processing_callback_remove(call: CallbackQuery, state: FSMContext):
     await call.message.delete()
 
 
 # Колбэк с обработкой кнопки
+@router_missed.callback_query(text="...")
 async def processing_callback_answer(call: CallbackQuery, state: FSMContext):
-    await call.answer(cache_time=60)
+    await call.answer(cache_time=20)
 
 
 # Колбэк с обработкой удаления сообщений потерявших стейт
+@router_missed.callback_query()
 async def processing_callback_missed(call: CallbackQuery, state: FSMContext):
     try:
         await call.message.delete()
@@ -29,14 +34,7 @@ async def processing_callback_missed(call: CallbackQuery, state: FSMContext):
 
 
 # Обработка всех неизвестных команд
+@router_missed.message()
 async def processing_message_missed(message: types.Message):
-    await message.answer("<b>♦ Неизвестная команда.</b>\n"
+    await message.answer("♦ Неизвестная команда.\n"
                          "▶ Введите /start")
-
-
-def register_all_missed(router: Router):
-    router.callback_query.register(processing_callback_remove, text="close_this", state="*")
-    router.callback_query.register(processing_callback_answer, text="...", state="*")
-    router.callback_query.register(processing_callback_missed, state="*")
-
-    router.message.register(processing_message_missed, state="*")
