@@ -7,7 +7,7 @@ from aiogram import Bot, Dispatcher
 
 from tgbot.config import BOT_TOKEN, scheduler
 from tgbot.middlewares import register_all_middlwares
-from tgbot.routers import register_all_routes
+from tgbot.routers import register_all_routers
 from tgbot.services.api_session import RequestsSession
 from tgbot.services.api_sqlite import create_bdx
 from tgbot.utils.misc.bot_commands import set_commands
@@ -32,7 +32,7 @@ async def main():
 
     # Подключение хендлеров
     register_all_middlwares(dispatcher)  # Регистрация всех мидлварей
-    register_all_routes(dispatcher)  # Регистрация всех роутеров
+    register_all_routers(dispatcher)  # Регистрация всех роутеров
 
     try:
         await set_commands(bot)
