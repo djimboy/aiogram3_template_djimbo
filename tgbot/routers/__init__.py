@@ -12,22 +12,24 @@ from tgbot.routers.z_all_missed import router_missed
 # Подключение всех роутеров
 def register_all_routers(dp: Dispatcher):
     # Создание образов роутера
-    admin_router = Router()
     user_router = Router()
+    admin_router = Router()
 
     # Инициализация роутеров
     dp.include_router(router_errors)
     dp.include_router(router_start)
-    dp.include_router(user_router)
-    dp.include_router(admin_router)
 
     # Подключение фильтров
+    admin_router.callback_query.filter(F.from_user.id.in_(get_admins()) & F.chat.type == "private")
     admin_router.message.filter(F.from_user.id.in_(get_admins()) & F.chat.type == "private")
+    user_router.callback_query.filter(F.chat.type == "private")
     user_router.message.filter(F.chat.type == "private")
 
     # Подгрузка хендлеров в роутеры
-    setup_admin_handlers(admin_router)
     setup_user_handlers(user_router)
+    setup_admin_handlers(admin_router)
 
     # Роутер с пропущенными хендлерами
-    user_router.include_router(router_missed)
+    dp.include_router(user_router)
+    dp.include_router(admin_router)
+    dp.include_router(router_missed)
