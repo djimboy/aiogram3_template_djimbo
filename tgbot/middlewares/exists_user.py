@@ -3,6 +3,7 @@ from aiogram import BaseMiddleware, types
 
 from tgbot.services.api_sqlite import get_userx, add_userx, delete_userx, update_userx
 from tgbot.utils.const_functions import clear_html
+from tgbot.utils.misc.bot_models import WrapperMapDict
 
 
 # Проверка юзеров в БД и их добавление
@@ -15,6 +16,9 @@ class ExistsUserMiddleware(BaseMiddleware):
             user_login = get_user.username
             user_name = clear_html(get_user.first_name)
             user_surname = clear_html(get_user.last_name)
+
+            if user_login is None: user_login = ""
+            if user_surname is None: user_surname = ""
 
             get_user_id = get_userx(user_id=user_id)
 
@@ -38,5 +42,7 @@ class ExistsUserMiddleware(BaseMiddleware):
                         update_userx(get_user_id['user_id'], user_login=user_login.lower())
                 else:
                     update_userx(get_user_id['user_id'], user_login="")
+
+                data['user'] = WrapperMapDict(get_userx(user_id=user_id))
 
         return await handler(event, data)
