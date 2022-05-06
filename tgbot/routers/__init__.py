@@ -15,7 +15,7 @@ def register_all_routers(dp: Dispatcher):
     user_router = Router()
     admin_router = Router()
 
-    # Инициализация роутеров
+    # Инициализация системных роутеров
     dp.include_router(router_errors)
     dp.include_router(router_start)
 
@@ -29,7 +29,7 @@ def register_all_routers(dp: Dispatcher):
     setup_user_handlers(user_router)
     setup_admin_handlers(admin_router)
 
-    # Роутер с пропущенными хендлерами
+    # Инициализация рабочих роутеров
     dp.include_router(user_router)
     dp.include_router(admin_router)
     dp.include_router(router_missed)
