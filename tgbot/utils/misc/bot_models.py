@@ -2,6 +2,13 @@
 from dataclasses import dataclass
 from datetime import datetime
 
+from aiogram.dispatcher.fsm.context import FSMContext
+
+from tgbot.services.api_session import RequestsSession
+
+FSM = FSMContext
+RS = RequestsSession
+
 
 # Упрощённый вызов из словаря
 class WrapperMapDict:
