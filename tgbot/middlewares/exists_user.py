@@ -43,6 +43,6 @@ class ExistsUserMiddleware(BaseMiddleware):
                 else:
                     update_userx(get_user_id['user_id'], user_login="")
 
-                data['user'] = WrapperMapDict(get_userx(user_id=user_id))
+        data['user'] = WrapperMapDict(get_userx(user_id=user_id))
 
         return await handler(event, data)
