@@ -5,7 +5,7 @@ import sys
 
 from aiogram import Bot, Dispatcher
 
-from tgbot.config import BOT_TOKEN, scheduler
+from tgbot.config import BOT_TOKEN, scheduler, get_admins
 from tgbot.middlewares import register_all_middlwares
 from tgbot.routers import register_all_routers
 from tgbot.services.api_session import RequestsSession
@@ -30,7 +30,6 @@ async def main():
     rSession = RequestsSession()
     bot = Bot(token=BOT_TOKEN, parse_mode="HTML")
 
-    # Подключение хендлеров
     register_all_middlwares(dispatcher)  # Регистрация всех мидлварей
     register_all_routers(dispatcher)  # Регистрация всех роутеров
 
@@ -41,6 +40,7 @@ async def main():
 
         print("~~~~~ Bot was started ~~~~~")
         bot_logger.warning("Bot was started")
+        if len(get_admins()) == 0: print("***** ENTER ADMIN ID IN settings.ini *****")
 
         await bot.get_updates(offset=-1)
         await dispatcher.start_polling(bot, allowed_updates=dispatcher.resolve_used_update_types(), rSession=rSession)
