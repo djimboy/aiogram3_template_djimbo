@@ -1,5 +1,5 @@
-colorlog~=6.6.0
-aiogram~=3.0.0b2
-aiohttp~=3.8.1
-typing~=3.7.4.3
-APScheduler~=3.8.0
+colorlog
+aiogram>=3.0.0b2
+aiohttp
+typing
+APScheduler==3.8.0
