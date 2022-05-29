@@ -11,7 +11,7 @@ from tgbot.routers import register_all_routers
 from tgbot.services.api_session import RequestsSession
 from tgbot.services.api_sqlite import create_bdx
 from tgbot.utils.misc.bot_commands import set_commands
-from tgbot.utils.misc.bot_logging import start_logging
+from tgbot.utils.misc.bot_logging import bot_logger
 from tgbot.utils.misc_functions import autobackup, startup_notify
 
 
@@ -40,7 +40,7 @@ async def main():
         await scheduler_start(bot)
 
         print("~~~~~ Bot was started ~~~~~")
-        logger.warning("Bot was started")
+        bot_logger.warning("Bot was started")
 
         await bot.get_updates(offset=-1)
         await dispatcher.start_polling(bot, allowed_updates=dispatcher.resolve_used_update_types(), rSession=rSession)
@@ -50,16 +50,15 @@ async def main():
 
 
 if __name__ == "__main__":
-    logger = start_logging()
 
     try:
-        # Исправление ошибки "RuntimeError: Event loop is closed" на Windows. Можно закомментировать для быстрого перезапуска
+        # Исправление ошибки "RuntimeError: Event loop is closed" на Windows
         # if sys.version_info[0] == 3 and sys.version_info[1] >= 8 and sys.platform.startswith("win"):
         #     asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
 
         asyncio.run(main())
     except (KeyboardInterrupt, SystemExit):
-        logger.warning("Bot was stopped")
+        bot_logger.warning("Bot was stopped")
     finally:
         if sys.platform.startswith("win"):
             os.system("cls")
