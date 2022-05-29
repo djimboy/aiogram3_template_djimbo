@@ -87,15 +87,15 @@ def split_messages(get_list: list, count: int):
 
 # Получение даты
 def get_date():
-    dt = datetime.today().replace(microsecond=0)
-    dt = dt.strftime("%d.%m.%Y %H:%M:%S")
+    this_date = datetime.today().replace(microsecond=0)
+    this_date = this_date.strftime("%d.%m.%Y %H:%M:%S")
 
-    return dt
+    return this_date
 
 
 # Получение юникс даты
 def get_unix():
-    return int(time.time()) + 10800
+    return int(time.time())
 
 
 # Генерация пароля
