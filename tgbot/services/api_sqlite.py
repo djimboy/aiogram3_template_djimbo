@@ -105,19 +105,22 @@ def delete_userx(**kwargs):
 
 ######################################## СОЗДАНИЕ БАЗЫ ДАННЫХ ######################################
 # Создание всех таблиц для Базы Данных
-def create_bdx():
+def create_dbx():
     with sqlite3.connect(PATH_DATABASE) as con:
         con.row_factory = dict_factory
 
         # Таблица с хранением пользователей
-        check_sql = con.execute("PRAGMA table_info(storage_users)").fetchall()
-        check_create_users = [c for c in check_sql]
-        if len(check_create_users) == 7:
+        if len(con.execute("PRAGMA table_info(storage_users)").fetchall()) == 7:
             print("DB was found(1/1)")
         else:
             con.execute("CREATE TABLE storage_users("
                         "increment INTEGER PRIMARY KEY AUTOINCREMENT, "
-                        "user_id INTEGER, user_login TEXT, user_name TEXT, "
-                        "user_surname TEXT, user_date TIMESTAMP, user_unix INTEGER)")
+                        "user_id INTEGER,"
+                        "user_login TEXT,"
+                        "user_name TEXT,"
+                        "user_surname TEXT,"
+                        "user_date TIMESTAMP,"
+                        "user_unix INTEGER)")
             print("DB was not found(1/1) | Creating...")
+
         con.commit()
